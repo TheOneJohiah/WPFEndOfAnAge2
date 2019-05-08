@@ -1,0 +1,299 @@
+﻿<Window x:Class="WpfEndOfAnAge_S1.PresentationLayer.GameSessionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfEndOfAnAge_S1.PresentationLayer"
+        mc:Ignorable="d"
+        Title="GameSessionView" Height="768" Width="1366"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Background="AntiqueWhite">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+        <Style x:Key="BorderStyle" TargetType="Border">
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Margin" Value="3,3,3,3"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BorderBrush" Value="CadetBlue"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        <Style x:Key="BorderPlayerInfo" TargetType="Border">
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Margin" Value="3,10,3,3"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BorderBrush" Value="CadetBlue"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        <Style x:Key="LabelTitle" TargetType="Label">
+            <Setter Property="FontSize" Value="45"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+        </Style>
+        <Style x:Key="LabelPInfo" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+        </Style>
+        <Style x:Key="TBPlaceholder" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        <Style x:Key="TBResponseDisplay" TargetType="TextBox">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="160"/>
+            <Setter Property="Width" Value="500"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+        </Style>
+        <Style x:Key="TBDisplay" TargetType="TextBox">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Height" Value="Auto"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10,10,10,10"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+        </Style>
+        <Style x:Key="ButtonMap" TargetType="Button">
+            <Setter Property="FontSize" Value="8"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Width" Value="45"/>
+            <Setter Property="FontFamily" Value="Lucida Console"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="670"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="670"/>
+        </Grid.ColumnDefinitions>
+        <Button
+            Content="Quit"
+            Style="{StaticResource ButtonMap}" Grid.Column="1" Margin="615,10,10,45"
+            Click="Quit_Click">
+
+        </Button>
+        <Border
+            Grid.Column="1"
+            Grid.Row="1"
+            Style="{StaticResource BorderStyle}">
+            <Image
+                Source="C:\Users\thore\Desktop\Programming\CIT 195\Week 12\WpfEndOfAnAge_S1\WpfEndOfAnAge_S1\Assets\TB Quest Game Map.png"/>
+        </Border>
+        <Grid
+            Grid.Column="1"
+            Grid.Row="1">
+            <Button
+                x:Name="SkeetalaButton"
+                Content="Skeetala"
+                Style="{StaticResource ButtonMap}"
+                Margin="430,335,195,320"
+                Visibility="{Binding IsSkeetalaVisible, Converter={StaticResource BooleanToVisibility}}"
+                Click="SkeetalaButton_Click"/>
+            <Button
+                x:Name="BayButton"
+                Content="The Great Bay"
+                Style="{StaticResource ButtonMap}"
+                Margin="205,522,395,133" Width="70"
+                Visibility="{Binding IsBayVisible, Converter={StaticResource BooleanToVisibility}}"
+                Click="BayButton_Click"/>
+            <Button
+                x:Name="FortButton"
+                Content="The Fortress"
+                Style="{StaticResource ButtonMap}"
+                Margin="93,100,517,554" Width="60" Height="16"
+                Visibility="{Binding IsFortressVisible, Converter={StaticResource BooleanToVisibility}}"
+                Click="FortButton_Click"/>
+            <Button
+                x:Name="NifarraButton"
+                Content="Nifarra"
+                Style="{StaticResource ButtonMap}"
+                Margin="130,234,496,422" Height="14" Width="44"
+                Visibility="{Binding IsNifarraVisible, Converter={StaticResource BooleanToVisibility}}"
+                Click="NifarraButton_Click"/>
+            <Button
+                x:Name="KefanaButton"
+                Content="Kefana Bazaar"
+                Style="{StaticResource ButtonMap}"
+                Margin="430,488,170,167" Width="70"
+                Visibility="{Binding IsKefanaVisible, Converter={StaticResource BooleanToVisibility}}"
+                Click="KefanaButton_Click"/>
+            <Button
+                x:Name="AirshipButton"
+                Content="Society Airship"
+                Style="{StaticResource ButtonMap}"
+                Margin="274,264,316,390" Width="80" Height="16"
+                Visibility="{Binding IsSocietyVisible, Converter={StaticResource BooleanToVisibility}}"
+                Click="AirshipButton_Click"/>
+            <Button
+                x:Name="HometownButton"
+                Content="Hometown"
+                Style="{StaticResource ButtonMap}"
+                Margin="514,154,112,500" Height="16" Width="44"
+                Click="HometownButton_Click"/>
+            <Button
+                x:Name="LabButton"
+                Content="Ancient Lab"
+                Style="{StaticResource ButtonMap}"
+                Margin="448,127,152,527" Width="60" Height="16"
+                Click="AncientButton_Click"/>
+        </Grid>
+        <Label
+            Content="Placeholder Game Name"
+            Style="{StaticResource LabelTitle}"/>
+        <Label
+            Grid.Column="1"
+            Content="Map"
+            Style="{StaticResource LabelTitle}"/>
+        <Grid
+            Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="23*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="12*"/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    Style="{StaticResource BorderStyle}">
+                    <TextBlock
+                        Style="{StaticResource TBPlaceholder}">
+                        Player Image
+                    </TextBlock>
+                </Border>
+                <Border
+                    Grid.Column="1"
+                    Style="{StaticResource BorderStyle}">
+                    <StackPanel
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Margin="10,0,0,0">
+                        <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                            <Label Content="Name" Style="{StaticResource LabelPInfo}"/>
+                            <TextBox
+                            Height="Auto"
+                            Width="Auto"
+                            VerticalContentAlignment="top"
+                            Style="{StaticResource TBDisplay}"
+                            Text="{Binding Player.Name, Mode=OneWay}"/>
+                        </StackPanel>
+                        <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                            <Label Content="Age" Style="{StaticResource LabelPInfo}"/>
+                            <TextBox
+                            Height="Auto"
+                            Width="Auto"
+                            VerticalContentAlignment="top"
+                            Style="{StaticResource TBDisplay}"
+                            Text="{Binding Player.Age, Mode=OneWay}"/>
+                        </StackPanel>
+                        <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                            <Label Content="Alignment" Style="{StaticResource LabelPInfo}"/>
+                            <TextBox
+                            Height="Auto"
+                            Width="Auto"
+                            VerticalContentAlignment="top"
+                            Style="{StaticResource TBDisplay}"
+                            Text="{Binding Player.Alignment, Mode=OneWay}"/>
+                        </StackPanel>
+                        <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                            <Label Content="Experience" Style="{StaticResource LabelPInfo}"/>
+                            <TextBox
+                            Height="Auto"
+                            Width="Auto"
+                            VerticalContentAlignment="top"
+                            Style="{StaticResource TBDisplay}"
+                            Text="{Binding Player.ExperiencePoints, Mode=OneWay}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border
+                    Grid.Column="2"
+                    Style="{StaticResource BorderStyle}">
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource TBPlaceholder}">
+                        Inventory, shop item info, quest log, enemy image/info block
+                    </TextBlock>
+                </Border>
+            </Grid>
+            <Grid
+                Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="13*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="38*"/>
+                </Grid.ColumnDefinitions>
+                <Border
+                    Grid.Column="1"
+                    Style="{StaticResource BorderStyle}">
+                    <TextBox
+                        x:Name="TBOutput"
+                        VerticalScrollBarVisibility="Auto"
+                        VerticalContentAlignment="top"
+                        TextWrapping="Wrap"
+                        Style="{StaticResource TBResponseDisplay}"
+                        Text="{Binding CurrentLocation.Description, Mode=OneWay}"
+                        TextChanged="TBOutput_TextChanged"/>
+                </Border>
+                <Border
+                    Style="{StaticResource BorderStyle}">
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource TBPlaceholder}">
+                        NPC/Location Image
+                    </TextBlock>
+                </Border>
+                <Border
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Style="{StaticResource BorderStyle}">
+                    <TextBlock
+                        Grid.Column="0"
+                        Style="{StaticResource TBPlaceholder}">
+                        Possible player actions/responses
+                    </TextBlock>
+                </Border>
+                <Border
+                    Grid.Row="1"
+                    Style="{StaticResource BorderStyle}">
+                    <TextBox
+                        VerticalScrollBarVisibility="Auto"
+                        VerticalContentAlignment="top"
+                        TextWrapping="Wrap"
+                        Style="{StaticResource TBDisplay}"
+                        Text="{Binding CurrentLocation.Name, Mode=OneWay}"
+                        TextChanged="TBOutput_TextChanged"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

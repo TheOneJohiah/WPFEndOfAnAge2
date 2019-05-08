@@ -1,0 +1,17 @@
+﻿TODO: (This list is in no particular order, and is likely not complete)
+Finalize Player and Character properties
+Figure out how exactly limb data will be stored. Current idea is as a separate class which can be used to generate new limbs in shops, etc.
+Implement switching out limbs, this is part of Player properties
+Figure out how shops will work
+Implement player standings affecting many aspects of the game
+Implement experience point upgrades
+Implement random encounters
+Implement combat, HP loss, repair, energy, etc.
+Implement changing alignment
+Implement Read/write for saving and loading?
+Implement characters in various locations
+Implement looting from sites
+Implement player actions in various locations
+Implement story using the characters mentioned above
+Implement boss class, and multiple characters as secret bosses depending on choices made by player?
+Finalize map
