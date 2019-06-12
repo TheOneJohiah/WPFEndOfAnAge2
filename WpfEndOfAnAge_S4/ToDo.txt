@@ -1,0 +1,12 @@
+﻿TODO: (This list is in no particular order, and is likely not complete)
+Figure out how shops will work
+//Implement player standings affecting many aspects of the game
+//Implement experience point upgrades
+//Implement random encounters
+Implement combat, HP loss, energy, etc.
+//Implement changing alignment
+//Implement Read/write for saving and loading?
+Implement characters in various locations
+Implement player actions in various locations
+Implement story using the characters mentioned above
+Implement boss class, and multiple characters as secret bosses depending on choices made by player?
