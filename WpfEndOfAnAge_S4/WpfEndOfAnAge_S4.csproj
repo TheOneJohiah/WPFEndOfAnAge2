@@ -59,6 +59,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\BattleModeEnum.cs" />
+    <Compile Include="Models\Citizen.cs" />
+    <Compile Include="Models\IBattle.cs" />
+    <Compile Include="Models\ISpeak.cs" />
+    <Compile Include="Models\Military.cs" />
+    <Compile Include="Models\NPC.cs" />
     <Compile Include="ObservableObject.cs" />
     <Compile Include="Utilities\StringHelpers.cs" />
   </ItemGroup>

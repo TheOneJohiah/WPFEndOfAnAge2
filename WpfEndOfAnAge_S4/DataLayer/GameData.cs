@@ -16,7 +16,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
             return new Player()
             {
                 Id = 1,
-                Name = "Mezzek",
+                Name = "Mezzek Farnasson",
                 Age = 23,
                 Alignment = Character.FactionAlignment.Unaligned,
                 ExperiencePoints = 0,
@@ -65,8 +65,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     GameItems = new ObservableCollection<GameItem>
                     {
                         GameItemById(1001),
-                        GameItemById(2001),
-                        GameItemById(3001)
+                        GameItemById(2001)
                     }
                 }
                 );
@@ -91,7 +90,11 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Description = "An 80 mile long airship that flies using lost technologies, the Societies' flagship is a behemoth. The main courtyard stretches before you, people bustling to the shops around the square. A good place to find a quest or improve your armor.",
                     Accessible = false,
                     ModifyXP = 10,
-                    LocationOwner = Location.LocationOwnerName.TSOFP
+                    LocationOwner = Location.LocationOwnerName.TSOFP,
+                    GameItems = new ObservableCollection<GameItem>
+                    {
+                        GameItemById(3001)
+                    }
                 }
                 );
 
@@ -181,6 +184,65 @@ namespace WpfEndOfAnAge_S1.DataLayer
                 new Attachment(1004, "Base Right Sleeve", 1, 2, 10, 0, "Compatible with all powered armor.", 0, Attachment.PartLocationName.RIGHTARM),
                 new Attachment(1005, "Base Left Leg", 1, 2, 10, 0, "Compatible with all powered armor.", 0, Attachment.PartLocationName.LEFTLEG),
                 new Attachment(1006, "Base Right Leg", 1, 2, 10, 0, "Compatible with all powered armor.", 0, Attachment.PartLocationName.RIGHTLEG),
+            };
+        }
+        public static List<Npc> Npcs()
+        {
+            return new List<Npc>()
+            {
+                new Military()
+                {
+                    Id = 0001,
+                    Name = "Overseer Xera",
+                    Alignment = Character.FactionAlignment.TSOFP,
+                    Description = "Quite possibly the most powerful woman in the world, she is shrounded in mystery. Rumors claim she has ancient artifacts implanted in her very skull that give her the abiltiy to read minds.",
+                    Damage = 100,
+                    Messages = new List<string>()
+                    {
+                        "Hello there Mezzek. I've been expecting you.",
+                        "So this is the one they've all been talking about. You're not much to look at.",
+                        "Who knows, maybe you'll accomplish great things.",
+                        "Sometimes art is more than just a symbol."
+                    }                       
+                },
+                new Military()
+                {
+                    Id = 0002,
+                    Name = "The Core",
+                    Alignment = Character.FactionAlignment.Unaligned,
+                    Description = "A massive sphere born of ancient technologies, deep in the center of the fortress. It contains the answers to quite literally everything in the universe.",
+                    Damage = 50,
+                    Messages = new List<string>()
+                    {
+                        "..."
+                    }
+                },
+                new Citizen()
+                {
+                    Id = 1001,
+                    Name = "Farnas, your dad",
+                    Alignment = Character.FactionAlignment.Unaligned,
+                    Description = "Your father. He's in his farming clothes right now, with a straw hat on. He smiles and nods when he sees you.",
+                    Messages = new List<string>()
+                    {
+                        "Son, it sure is good to see you again.",
+                        "How have your adventures been? Gotten into any trouble lately?",
+                        "Now that you've got your own suit, I think you should have my gauntlet. It's on the table inside, take it."
+                    }
+                },
+                new Citizen()
+                {
+                    Id = 1002,
+                    Name = "Illina, your mom",
+                    Alignment = Character.FactionAlignment.Unaligned,
+                    Description = "Your mother. She's got your baby sister cradled in her arms. As you approach, she quietly shushes you. 'The baby's sleeping.'",
+                    Messages = new List<string>()
+                    {
+                        "How are you doing, Mezzek?",
+                        "Your father is so proud of you.",
+                        "It warms my heart to see you working to secure a future for your baby sister."
+                    }
+                }
             };
         }
     }

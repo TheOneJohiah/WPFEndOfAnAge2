@@ -16,8 +16,11 @@ namespace WpfEndOfAnAge_S1.Models
         private int _maxCohesion;
         private int _energy;
         private int _maxEnergy;
+        private int _damage;
         private int _totalWealth;
         private int _experiencePoints;
+        private int _locationId;
+        private BattleModeName _battleMode;
         private int _wealth;
         private List<Location> _locationsVisited;
         private ObservableCollection<GameItem> _inventory;
@@ -36,6 +39,11 @@ namespace WpfEndOfAnAge_S1.Models
                 _experiencePoints = value;
                 OnPropertyChanged(nameof(ExperiencePoints));
             }
+        }
+        public int LocationId
+        {
+            get { return _locationId; }
+            set { _locationId = value; }
         }
         public List<Location> LocationsVisited
         {
@@ -57,6 +65,8 @@ namespace WpfEndOfAnAge_S1.Models
             }
             
         }
+
+
         public int MaxCohesion
         {
             get { return _maxCohesion; }
@@ -66,6 +76,16 @@ namespace WpfEndOfAnAge_S1.Models
         {
             get { return _maxEnergy; }
             set { _maxEnergy = value; }
+        }
+        public int Damage
+        {
+            get { return _damage; }
+            set { _damage = value; }
+        }
+        public BattleModeName BattleMode
+        {
+            get { return _battleMode; }
+            set { _battleMode = value; }
         }
         public int TotalWealth
         {
@@ -209,6 +229,48 @@ namespace WpfEndOfAnAge_S1.Models
             OnPropertyChanged(nameof(MaxCohesion));
         }
 
+        public void RecalculateDamage()
+        {
+            _damage = 0;
+            foreach (Attachment item in _equippedAttachments)
+            {
+                _damage = _damage + item.Damage;
+            }
+            OnPropertyChanged(nameof(Damage));
+        }
+        #region BATTLE METHODS
+
+        /// <summary>
+        /// Standard damage
+        /// </summary>
+        /// <returns>damage</returns>
+        public int Attack()
+        {
+            int damage = Damage * 2;
+            return damage;
+        }
+
+        /// <summary>
+        /// Half damage
+        /// </summary>
+        /// <returns>halved damage</returns>
+        public int Defend()
+        {
+            int damage = Damage;
+            return damage;
+        }
+
+        /// <summary>
+        /// Nullifies your damage for the round
+        /// </summary>
+        /// <returns>no damage</returns>
+        public int Retreat()
+        {
+            int damage = 0;
+            return damage;
+        }
+
+        #endregion
         #endregion
 
         #region EVENTS

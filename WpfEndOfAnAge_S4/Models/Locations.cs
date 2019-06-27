@@ -33,6 +33,9 @@ namespace WpfEndOfAnAge_S1.Models
         private LocationOwnerName _locationOwner;
         private int _modifyXP;
         private ObservableCollection<GameItem> _gameItems;
+        private ObservableCollection<Npc> _npcs;
+
+
         #endregion
 
         #region PROPERTIES
@@ -87,6 +90,12 @@ namespace WpfEndOfAnAge_S1.Models
         {
             get { return _gameItems; }
             set { _gameItems = value; }
+        }
+
+        public ObservableCollection<Npc> Npcs
+        {
+            get { return _npcs; }
+            set { _npcs = value; }
         }
 
         public string VisitedDescription

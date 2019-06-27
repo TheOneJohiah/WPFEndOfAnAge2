@@ -26,10 +26,11 @@ namespace WpfEndOfAnAge_S1.Models
 
         protected int _id;
         protected string _name;
-        protected int _locationId;
+        //protected int _locationId;
         protected int _age;
         protected FactionAlignment _alignment;
 
+        protected Random random = new Random();
         #endregion
 
         #region PROPERTIES
@@ -46,11 +47,11 @@ namespace WpfEndOfAnAge_S1.Models
             set { _name = value; }
         }
 
-        public int LocationId
-        {
-            get { return _locationId; }
-            set { _locationId = value; }
-        }
+        //public int LocationId
+        //{
+        //    get { return _locationId; }
+        //    set { _locationId = value; }
+        //}
 
         public int Age
         {
@@ -73,12 +74,12 @@ namespace WpfEndOfAnAge_S1.Models
 
         }
 
-        public Character(int id, string name, FactionAlignment alignment, int locationId)
+        public Character(int id, string name, FactionAlignment alignment)
         {
             _id = id;
             _name = name;
             _alignment = alignment;
-            _locationId = locationId;
+            //_locationId = locationId;
         }
 
         #endregion
