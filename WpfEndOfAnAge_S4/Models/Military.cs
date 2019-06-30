@@ -13,6 +13,7 @@ namespace WpfEndOfAnAge_S1.Models
         public List<string> Messages { get; set; }
         public BattleModeName BattleMode { get; set; }
         public int Damage { get; set; }
+        public int Cohesion { get; set; }
 
         protected override string InformationText()
         {
@@ -30,11 +31,13 @@ namespace WpfEndOfAnAge_S1.Models
             FactionAlignment alignment,
             string description,
             List<string> messages,
-            int damage)
+            int damage,
+            int cohesion)
             : base(id, name, alignment, description)
         {
             Messages = messages;
             Damage = damage;
+            Cohesion = cohesion;
         }
 
         /// <summary>
