@@ -1,0 +1,3 @@
+﻿Armor will not always visually update in the equipment tab. Reason for this is unknown, as sometimes it does work. With the same piece of equipment, used as the first action after game startup, results inconsistent.
+All locations are set to be visible, as the button hiding method seems to not be functioning properly and updating when it should be.
+Sometimes, combat may not be working. I only had it happen once, and I was unable to reproduce it.

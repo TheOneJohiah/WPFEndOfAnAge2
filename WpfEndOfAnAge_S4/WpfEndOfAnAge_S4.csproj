@@ -128,5 +128,8 @@
   <ItemGroup>
     <Resource Include="ToDo.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Bugs.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -89,6 +89,10 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     {
                         NpcById(1001),
                         NpcById(1002)
+                    },
+                    GameItems = new ObservableCollection<GameItem>
+                    {
+                        GameItemById(1002)
                     }
                 }
                 );
@@ -184,7 +188,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Id = 8,
                     Name = "The Ancient Fortress",
                     Description = "From the outside, it looked unassailable. The inside isn't much better. Automated defense turrets hide behind every corner, and numerous dastardly traps attempt to prevent your passage. When they register the armor you wear, however, most stand down. In the center of the facility is The Core, an offline hyperadvanced Artificial Intelligence. Therein lies the key to reactivate the star that sustains life on this planet.",
-                    Accessible = false,
+                    Accessible = true,
                     ModifyXP = 30,
                     LocationOwner = Location.LocationOwnerName.Unaligned,
                     Npcs = new ObservableCollection<Npc>()
@@ -206,6 +210,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
                 new GameItem(0001, "Your clothes", 1, "Just the clothes you've worn, handspun and rough.", 0),
                 new GameItem(0002, "A note from your father", 1, "The note reads, ''", 0),
                 new Attachment(1001, "Ultima", 1000000000, 50, 500, 10, "Ultima is a very powerful artifact, a suit core stronger than any other.", 0, Attachment.PartLocationName.CHEST),
+                new Attachment(1002, "Shotgauntlet", 20, 20, 10, 10, "Your dad's old shotgauntlet. Decent for stopping bandits and rabid animals.", 10, Attachment.PartLocationName.LEFTARM),
                 new Injector(2001, "Nanite injection", 100, 100, 0, "These nanites will patch armor and heal wounds.", 10),
                 new Relic(3001, "The Cube", 1000000001, "No one knows what this does, but it is a central display in the SOFP museum. It's a pitch black cube that absorbs all light that falls upon it.", 70, "Nothing seems to happen.", Relic.UseActionType.OPENLOCATION)
 
