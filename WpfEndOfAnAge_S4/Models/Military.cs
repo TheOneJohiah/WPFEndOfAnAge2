@@ -11,9 +11,6 @@ namespace WpfEndOfAnAge_S1.Models
         Random r = new Random();
 
         public List<string> Messages { get; set; }
-        public BattleModeName BattleMode { get; set; }
-        public int Damage { get; set; }
-        public int Cohesion { get; set; }
 
         protected override string InformationText()
         {
@@ -31,13 +28,11 @@ namespace WpfEndOfAnAge_S1.Models
             FactionAlignment alignment,
             string description,
             List<string> messages,
-            int damage,
-            int cohesion)
-            : base(id, name, alignment, description)
+            int cohesion,
+            int damage)
+            : base(id, name, alignment, description, cohesion, damage)
         {
             Messages = messages;
-            Damage = damage;
-            Cohesion = cohesion;
         }
 
         /// <summary>
@@ -70,39 +65,5 @@ namespace WpfEndOfAnAge_S1.Models
         {
             throw new NotImplementedException();
         }
-
-        #region BATTLE METHODS
-
-        /// <summary>
-        /// Standard damage
-        /// </summary>
-        /// <returns>damage</returns>
-        public int Attack()
-        {
-            int damage = Damage * 2;
-            return damage;
-        }
-
-        /// <summary>
-        /// Half damage
-        /// </summary>
-        /// <returns>halved damage</returns>
-        public int Defend()
-        {
-            int damage = Damage;
-            return damage;
-        }
-
-        /// <summary>
-        /// Nullifies your damage for the round
-        /// </summary>
-        /// <returns>no damage</returns>
-        public int Retreat()
-        {
-            int damage = 0;
-            return damage;
-        }
-
-        #endregion
     }
 }

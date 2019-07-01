@@ -35,6 +35,7 @@ namespace WpfEndOfAnAge_S1.PresentationLayer
 
         private string _currentLocationInformation;
         private GameItem _currentGameItem;
+        private Npc _currentNpc;
 
         private Random random = new Random();
         #endregion
@@ -102,6 +103,15 @@ namespace WpfEndOfAnAge_S1.PresentationLayer
             set { _currentGameItem = value; }
         }
 
+        public Npc CurrentNpc
+        {
+            get { return _currentNpc; }
+            set
+            {
+                _currentNpc = value;
+                OnPropertyChanged(nameof(CurrentNpc));
+            }
+        }
         public bool IsFortressVisible { get; set; }
         public bool IsSkeetalaVisible { get; set; }
         public bool IsSocietyVisible { get; set; }
@@ -165,7 +175,7 @@ namespace WpfEndOfAnAge_S1.PresentationLayer
             _player.UpdateInventoryCategories();
         }
 
-
+        #region LOCATIONMETHODS
         internal void MoveToAncientLab()
         {
             CurrentLocation = _accessibleLocations.FirstOrDefault(l => l.Id == 1);
@@ -174,6 +184,18 @@ namespace WpfEndOfAnAge_S1.PresentationLayer
         internal void MoveToHometown()
         {
             CurrentLocation = _accessibleLocations.FirstOrDefault(l => l.Id == 2);
+            //  attempting to update accesibility; button invisibility updating doesn't seem to work.
+            foreach (Location location in _gameMap.Locations)
+            {
+                if (location.Id == 4)
+                {
+                    if (location.Accessible == false)
+                    {
+                        location.Accessible = true;
+                    }
+                }
+            }
+           
             OnPlayerMove();
         }
         internal void MoveToSOFP()
@@ -206,7 +228,7 @@ namespace WpfEndOfAnAge_S1.PresentationLayer
             CurrentLocation = _accessibleLocations.FirstOrDefault(l => l.Id == 8);
             OnPlayerMove();
         }
-
+        
         private void SetLocationVisibility()
         {
             foreach (Location location in _gameMap.Locations)
@@ -266,6 +288,162 @@ namespace WpfEndOfAnAge_S1.PresentationLayer
 
             }
         }
+        #endregion
+
+        public void OnPlayerTalkTo()
+        {
+            if (CurrentNpc != null && CurrentNpc is ISpeak)
+            {
+                ISpeak speakingNpc = CurrentNpc as ISpeak;
+                CurrentLocationInformation = speakingNpc.Speak();
+            }
+        }
+
+        /// <summary>
+        /// handle the attack event in the view.
+        /// </summary>
+        public void OnPlayerAttack()
+        {
+            _player.BattleMode = BattleModeName.ATTACK;
+            Battle();
+        }
+
+        /// <summary>
+        /// handle the defend event in the view.
+        /// </summary>
+        public void OnPlayerDefend()
+        {
+            _player.BattleMode = BattleModeName.DEFEND;
+            Battle();
+        }
+
+        /// <summary>
+        /// handle the retreat event in the view.
+        /// </summary>
+        public void OnPlayerRetreat()
+        {
+            _player.BattleMode = BattleModeName.RETREAT;
+            Battle();
+        }
+
+        /// <summary>
+        /// process the outcome of a battle with an NPC
+        /// </summary>
+        private void Battle()
+        {
+            //
+            // check to see if an NPC can battle
+            //
+            if (_currentNpc is Military)
+            {
+                IBattle battleNpc = _currentNpc as IBattle;
+                string battleInformation = "";
+                int playerDamage;
+                int npcDamage;
+
+
+                playerDamage = CalculatePlayerDamage();
+                npcDamage = CalculateNpcDamage();
+                //
+                // build out the text for the current location information
+                //
+                battleInformation +=
+                    $"Player: {_player.BattleMode}     Damage dealt: {_player.Damage}   Cohesion: {_player.Cohesion}" + Environment.NewLine +
+                    $"NPC: {battleNpc.BattleMode}     Damage dealth: {_currentNpc.Damage}   Cohesion: {_currentNpc.Cohesion}" + Environment.NewLine;
+                //
+                // determine results of battle
+                //
+                _player.Cohesion = _player.Cohesion - npcDamage;
+                _currentNpc.Cohesion = _currentNpc.Cohesion - playerDamage;
+                if (Player.Cohesion <= 0)
+                {
+                    OnPlayerDies($"You have been slain by {_currentNpc.Name}.");
+                }
+                else if (_currentNpc.Cohesion <= 0)
+                {
+                    battleInformation += $"You have slain {_currentNpc.Name}.";
+                }
+                CurrentLocationInformation = battleInformation;
+            }
+            else
+            {
+                CurrentLocationInformation = "The current NPC is not battle ready. Seems you are a bit jumpy and your experience suffers.";
+                _player.ExperiencePoints -= 10;
+            }
+
+        }
+
+
+        /// <summary>
+        /// determine the NPC's battle response
+        /// </summary>
+        /// <returns>battle response</returns>
+        private BattleModeName NpcBattleResponse()
+        {
+            BattleModeName npcBattleResponse = BattleModeName.RETREAT;
+
+            switch (DieRoll(3))
+            {
+                case 1:
+                    npcBattleResponse = BattleModeName.ATTACK;
+                    break;
+                case 2:
+                    npcBattleResponse = BattleModeName.DEFEND;
+                    break;
+                case 3:
+                    npcBattleResponse = BattleModeName.RETREAT;
+                    break;
+            }
+            return npcBattleResponse;
+        }
+
+        /// <summary>
+        /// calculate player damage based on battle mode
+        /// </summary>
+        /// <returns>player damage</returns>
+        private int CalculatePlayerDamage()
+        {
+            int playerDamage = 0;
+
+            switch (_player.BattleMode)
+            {
+                case BattleModeName.ATTACK:
+                    playerDamage = _player.Attack();
+                    break;
+                case BattleModeName.DEFEND:
+                    playerDamage = _player.Defend();
+                    break;
+                case BattleModeName.RETREAT:
+                    playerDamage = _player.Retreat();
+                    break;
+            }
+
+            return playerDamage;
+        }
+
+        /// <summary>
+        /// calculate npc damage based on battle mode
+        /// </summary>
+        /// <returns>npc damage</returns>
+        private int CalculateNpcDamage()
+        {
+            int battleNpcDamage = 0;
+
+            switch (NpcBattleResponse())
+            {
+                case BattleModeName.ATTACK:
+                    battleNpcDamage = _currentNpc.Attack();
+                    break;
+                case BattleModeName.DEFEND:
+                    battleNpcDamage = _currentNpc.Defend();
+                    break;
+                case BattleModeName.RETREAT:
+                    battleNpcDamage = _currentNpc.Retreat();
+                    break;
+            }
+
+            return battleNpcDamage;
+        }
 
         /// <summary>
         /// player move event handler
@@ -320,8 +498,9 @@ namespace WpfEndOfAnAge_S1.PresentationLayer
             }
 
             //
-            // notify list box in view to update
+            // notify buttons to update
             //
+            SetLocationVisibility();
             OnPropertyChanged(nameof(AccessibleLocations));
         }
 

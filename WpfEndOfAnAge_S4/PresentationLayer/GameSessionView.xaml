@@ -243,6 +243,17 @@
                             Style="{StaticResource TBDisplay}"
                             Text="{Binding Player.Cohesion, Mode=OneWay}"/>
                         </StackPanel>
+                        <StackPanel
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+                            <Label Content="Max Cohesion" Style="{StaticResource LabelPInfo}"/>
+                            <TextBox
+                            Height="Auto"
+                            Width="Auto"
+                            VerticalContentAlignment="top"
+                            Style="{StaticResource TBDisplay}"
+                            Text="{Binding Player.MaxCohesion, Mode=OneWay}"/>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
 
@@ -370,6 +381,32 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </TabItem>
+
+                            <TabItem Header="NPCs"
+                                        x:Name="NpcsInfoTabItem">
+                                <DataGrid 
+                                            x:Name="LocationNpcsDataGrid"
+                                            Height="150"
+                                            ItemsSource="{Binding CurrentLocation.Npcs}" 
+                                            SelectedItem="{Binding CurrentNpc}"
+                                            AutoGenerateColumns="False"
+                                            HeadersVisibility="Column">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn 
+                                                    Header="Description" 
+                                                    IsReadOnly="True"                 
+                                                    Binding="{Binding Information, Mode=OneWay}"
+                                                    Width="*">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style>
+                                                    <Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </TabItem>
+
                         </TabControl>
 
                         <TextBox
@@ -395,13 +432,35 @@
                     Grid.Column="1"
                     Grid.Row="1"
                     Style="{StaticResource BorderStyle}">
-                    <StackPanel
+                        <StackPanel
                             Grid.Row="1"
                             Orientation="Horizontal">
-                        <Button 
+                            <Button 
                                 Content="Pick Up" 
                                 Style="{StaticResource ButtonMap}" 
                                 Click="PickUpButton_Click"/>
+                            <Button 
+                                Content="Speak To" 
+                                Style="{StaticResource ButtonMap}" 
+                                Click="SpeakToButton_Click"/>
+                            <StackPanel
+                                VerticalAlignment="Center"
+                                Orientation="Vertical"
+                                Margin="5">
+                                <Button
+                                Content="Attack" 
+                                Style="{StaticResource ButtonMap}" 
+                                Click="AttackButton_Click"/>
+                                <Button
+                                Margin="0,3,0,3"
+                                Content="Defend" 
+                                Style="{StaticResource ButtonMap}" 
+                                Click="DefendButton_Click"/>
+                                <Button 
+                                Content="Retreat" 
+                                Style="{StaticResource ButtonMap}" 
+                                Click="RetreatButton_Click"/>
+                            </StackPanel>
                     </StackPanel>
                 </Border>
                 <Border

@@ -22,8 +22,8 @@ namespace WpfEndOfAnAge_S1.Models
 
         }
 
-        public Citizen(int id, string name, FactionAlignment factionAlignment, string description, List<string> messages)
-            : base(id, name, factionAlignment, description)
+        public Citizen(int id, string name, FactionAlignment factionAlignment, string description, List<string> messages, int cohesion, int damage)
+            : base(id, name, factionAlignment, description, cohesion, damage)
         {
             Messages = messages;
         }

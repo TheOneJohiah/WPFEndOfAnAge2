@@ -111,5 +111,37 @@ namespace WpfEndOfAnAge_S1.PresentationLayer
                 _gameSessionViewModel.EquipGameItem();
             }
         }
+
+        private void SpeakToButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (LocationNpcsDataGrid.SelectedItem != null)
+            {
+                _gameSessionViewModel.OnPlayerTalkTo();
+            }
+        }
+
+        private void AttackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (LocationNpcsDataGrid.SelectedItem != null)
+            {
+                _gameSessionViewModel.OnPlayerAttack();
+            }
+        }
+
+        private void DefendButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (LocationNpcsDataGrid.SelectedItem != null)
+            {
+                _gameSessionViewModel.OnPlayerDefend();
+            }
+        }
+
+        private void RetreatButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (LocationNpcsDataGrid.SelectedItem != null)
+            {
+                _gameSessionViewModel.OnPlayerRetreat();
+            }
+        }
     }
 }

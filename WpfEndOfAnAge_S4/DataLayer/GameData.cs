@@ -21,6 +21,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
                 Alignment = Character.FactionAlignment.Unaligned,
                 ExperiencePoints = 0,
                 LocationId = 0,
+                MaxCohesion = 12,
                 Inventory = new ObservableCollection<GameItem>()
                 {
                     GameItemById(0001)
@@ -98,12 +99,17 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Id = 3,
                     Name = "Society of Future Past Mobile City",
                     Description = "An 80 mile long airship that flies using lost technologies, the Societies' flagship is a behemoth. The main courtyard stretches before you, people bustling to the shops around the square. A good place to find a quest or improve your armor.",
-                    Accessible = false,
+                    Accessible = true,
                     ModifyXP = 10,
                     LocationOwner = Location.LocationOwnerName.TSOFP,
                     GameItems = new ObservableCollection<GameItem>
                     {
                         GameItemById(3001)
+                    },
+                    Npcs = new ObservableCollection<Npc>()
+                    {
+                        NpcById(0001),
+                        NpcById(1006)
                     }
                 }
                 );
@@ -114,7 +120,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Id = 4,
                     Name = "Skeetala",
                     Description = "Thousands of people bustle through the massive square. Most of the many Skeeta villages are represented here, with no two Skeeta wearing clothing of the same color. A good place to find a quest.",
-                    Accessible = false,
+                    Accessible = true,
                     ModifyXP = 10,
                     LocationOwner = Location.LocationOwnerName.Skeeta,
                     Npcs = new ObservableCollection<Npc>()
@@ -130,9 +136,13 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Id = 5,
                     Name = "Kefana Bazaar",
                     Description = "People from all over the world come to the Kefana Bazaar. Ancient artifacts uncovered from within the desert, coupled with quests for expeditions to the same, make it an attractive option for trading.",
-                    Accessible = false,
+                    Accessible = true,
                     ModifyXP = 10,
-                    LocationOwner = Location.LocationOwnerName.Kefana
+                    LocationOwner = Location.LocationOwnerName.Kefana,
+                    Npcs = new ObservableCollection<Npc>()
+                    {
+                        NpcById(1004)
+                    }
                 }
                 );
 
@@ -142,9 +152,13 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Id = 6,
                     Name = "The Great Bay",
                     Description = "Numerous Vaitarra factions gather here to squabble and barter. Soldiers, sailors, pirates, stolen goods. Much can be purchased here, for a price.",
-                    Accessible = false,
+                    Accessible = true,
                     ModifyXP = 10,
-                    LocationOwner = Location.LocationOwnerName.Vaitarra
+                    LocationOwner = Location.LocationOwnerName.Vaitarra,
+                    Npcs = new ObservableCollection<Npc>()
+                    {
+                        NpcById(0003)
+                    }
                 }
                 );
 
@@ -154,9 +168,13 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Id = 7,
                     Name = "Nifarra",
                     Description = "This continent is extremely volcanic. An ashen haze hangs over the entrance to the city, much of which is underground. The fortress can be seen off in the distance. From here, it is a menacing black obelisk that looks night impenetrable. A cube shaped hole is in the door.",
-                    Accessible = false,
+                    Accessible = true,
                     ModifyXP = 10,
-                    LocationOwner = Location.LocationOwnerName.Niforr
+                    LocationOwner = Location.LocationOwnerName.Niforr,
+                    Npcs = new ObservableCollection<Npc>()
+                    {
+                        NpcById(1005)
+                    }
                 }
                 );
 
@@ -168,7 +186,11 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Description = "From the outside, it looked unassailable. The inside isn't much better. Automated defense turrets hide behind every corner, and numerous dastardly traps attempt to prevent your passage. When they register the armor you wear, however, most stand down. In the center of the facility is The Core, an offline hyperadvanced Artificial Intelligence. Therein lies the key to reactivate the star that sustains life on this planet.",
                     Accessible = false,
                     ModifyXP = 30,
-                    LocationOwner = Location.LocationOwnerName.Unaligned
+                    LocationOwner = Location.LocationOwnerName.Unaligned,
+                    Npcs = new ObservableCollection<Npc>()
+                    {
+                        NpcById(0002)
+                    }
                 }
                 );
 
@@ -182,9 +204,14 @@ namespace WpfEndOfAnAge_S1.DataLayer
             return new List<GameItem>()
             {
                 new GameItem(0001, "Your clothes", 1, "Just the clothes you've worn, handspun and rough.", 0),
+                new GameItem(0002, "A note from your father", 1, "The note reads, ''", 0),
                 new Attachment(1001, "Ultima", 1000000000, 50, 500, 10, "Ultima is a very powerful artifact, a suit core stronger than any other.", 0, Attachment.PartLocationName.CHEST),
                 new Injector(2001, "Nanite injection", 100, 100, 0, "These nanites will patch armor and heal wounds.", 10),
                 new Relic(3001, "The Cube", 1000000001, "No one knows what this does, but it is a central display in the SOFP museum. It's a pitch black cube that absorbs all light that falls upon it.", 70, "Nothing seems to happen.", Relic.UseActionType.OPENLOCATION)
+
+
+
+
             };
         }
 
@@ -231,7 +258,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     Cohesion = 300,
                     Messages = new List<string>()
                     {
-                        "..."
+                        "Authorization codes recognized. Activiting main network... done. Querying auxiliary nodes... done. Error: Plantary network operating at 3.2% of peak. Intializing system scan... done. Error: "
                     }
                 },
                 new Military()
@@ -252,7 +279,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
                 new Citizen()
                 {
                     Id = 1001,
-                    Name = "Farnas, your dad",
+                    Name = "Farnas",
                     Alignment = Character.FactionAlignment.Unaligned,
                     Description = "Your father. He's in his farming clothes right now, with a straw hat on. He smiles and nods when he sees you.",
                     Messages = new List<string>()
@@ -265,7 +292,7 @@ namespace WpfEndOfAnAge_S1.DataLayer
                 new Citizen()
                 {
                     Id = 1002,
-                    Name = "Illina, your mom",
+                    Name = "Illina",
                     Alignment = Character.FactionAlignment.Unaligned,
                     Description = "Your mother. She's got your baby sister cradled in her arms. As you approach, she quietly shushes you. 'The baby's sleeping.'",
                     Messages = new List<string>()
@@ -311,9 +338,9 @@ namespace WpfEndOfAnAge_S1.DataLayer
                     {
                         "Good evening. I remember, when I was young, that the location now known as the Fortress was once a regaled center of knowledge. The curators were a neutral party in every war, but the Archive went into lockdown during the last Great War, when an envious group assaulted it to claim it for themselves.",
                         "I don't know how or where you found that chestplate, but I do know this. It belonged to Head Curator Nira. The ancient defenses of the archive will recognize that and stand down, if you carry a Key.",
-                        "Accessing the Archive is the only way for us to reignite the sun."
+                        "Accessing the Archive is the only way for us to stabilize the sun."
                     }
-                }
+                },
                 new Citizen()
                 {
                     Id = 1006,
